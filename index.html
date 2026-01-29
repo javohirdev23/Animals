@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en" class="dark bg-neutral-primary-medium">
+  <head>
+    <!-- mode switcher -->
+    <script>
+      if (
+        localStorage.getItem("color-theme") === "dark" ||
+        (!("color-theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./img/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./img/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./img/android-chrome-192x192.png"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animals</title>
+    <link rel="stylesheet" href="./src/output.css" />
+  </head>
+  <body class="overflow-x-hidden">
+    <nav
+      class="bg-neutral-primary-medium/90 fixed w-full z-20 top-0 start-0 border-b border-default"
+    >
+      <div
+        class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+      >
+        <div class="flex justify-center items-center gap-2">
+          <img
+            class="w-12 h-12 rounded-full"
+            src="./img/logo.icon.png"
+            alt="logo"
+          />
+          <h2 class="text-blue-500 font-bold">Animals</h2>
+        </div>
+        <div
+          class="inline-flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-3"
+        >
+          <!-- enter -->
+          <div class="flex justify-center items-center gap-4">
+            <button
+              type="button"
+              class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none"
+            >
+              <span>
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 15 15"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4.5 1C4.22386 1 4 1.22386 4 1.5C4 1.77614 4.22386 2 4.5 2H12V13H4.5C4.22386 13 4 13.2239 4 13.5C4 13.7761 4.22386 14 4.5 14H12C12.5523 14 13 13.5523 13 13V2C13 1.44772 12.5523 1 12 1H4.5ZM6.60355 4.89645C6.40829 4.70118 6.09171 4.70118 5.89645 4.89645C5.70118 5.09171 5.70118 5.40829 5.89645 5.60355L7.29289 7H0.5C0.223858 7 0 7.22386 0 7.5C0 7.77614 0.223858 8 0.5 8H7.29289L5.89645 9.39645C5.70118 9.59171 5.70118 9.90829 5.89645 10.1036C6.09171 10.2988 6.40829 10.2988 6.60355 10.1036L8.85355 7.85355C9.04882 7.65829 9.04882 7.34171 8.85355 7.14645L6.60355 4.89645Z"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+            <button
+              id="theme-toggle"
+              type="button"
+              class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
+            >
+              <svg
+                id="theme-toggle-dark-icon"
+                class="hidden w-5 h-5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                ></path>
+              </svg>
+              <svg
+                id="theme-toggle-light-icon"
+                class="hidden w-5 h-5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- search add  -->
+    <div class="w-7xl mx-auto flex justify-start">
+      <div
+        class="top-23 flex w-100 mx-auto pl-2 fixed justify-center items-center gap-5"
+      >
+        <!-- search -->
+        <div class="">
+          <form class="max-w-2xl mx-auto flex justify-center">
+            <label
+              for="search"
+              class="block mb-2.5 text-sm font-medium text-heading sr-only"
+            ></label>
+            <div class="relative">
+              <input
+                type="search"
+                id="search"
+                class="block w-full p-3 ps-9 bg-neutral-secondary-medium/60 border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                placeholder="Animal name"
+                required
+              />
+              <button
+                type="button"
+                class="absolute end-1.5 bottom-1.5 text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none"
+              >
+                Search
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- add -->
+        <button
+          type="button"
+          class="text-white bg-brand/90 hover:bg-brand-light box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none"
+        >
+          <span class="flex justify-center items-center gap-1">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 2.75C8 2.47386 7.77614 2.25 7.5 2.25C7.22386 2.25 7 2.47386 7 2.75V7H2.75C2.47386 7 2.25 7.22386 2.25 7.5C2.25 7.77614 2.47386 8 2.75 8H7V12.25C7 12.5261 7.22386 12.75 7.5 12.75C7.77614 12.75 8 12.5261 8 12.25V8H12.25C12.5261 8 12.75 7.77614 12.75 7.5C12.75 7.22386 12.5261 7 12.25 7H8V2.75Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            <span>Add animal</span>
+          </span>
+        </button>
+      </div>
+    </div>
+    <!-- container -->
+    <div
+      id="container"
+      class="grid grid-cols-1 mt-38 justify-center mx-auto gap-4 sm:w- sm:grid-cols-2 md:w-xl md:grid-cols-2 lg:grid-cols-3 lg:w-7xl xl:grid-cols-4 xl:w-7xl"
+    ></div>
+    <!-- Loader -->
+    <div
+      id="loader"
+      class="grid grid-cols-1  justify-center mx-auto gap-4 sm:w- sm:grid-cols-2 md:w-xl md:grid-cols-2 lg:grid-cols-3 lg:w-7xl xl:grid-cols-4 xl:w-7xl"
+    ></div>
+
+    <!-- Template -->
+    <template id="templateCard">
+      <div
+        id="js-card"
+        class="bg-neutral-primary/40 w-70 mx-auto p-6 border border-default rounded-base shadow-xs hover:bg-neutral-secondary-soft group"
+      >
+        <!-- hoverbtn -->
+        <div class="flex justify-end">
+          <div
+            id="info"
+            class="group opacity-0 group-hover:opacity-100 flex size-10 items-center justify-center gap-1 rounded-lg border border-headi"
+          >
+            <div
+              class="size-1 rounded-full bg-heading duration-300 group-hover:opacity-0"
+            ></div>
+            <div
+              class="relative size-1 origin-center rounded-full bg-heading duration-300 before:absolute before:right-[2px] before:h-1 before:origin-right before:rounded-full before:bg-heading before:delay-300 before:duration-300 after:absolute after:right-[2px] after:h-1 after:origin-right after:rounded-full after:bg-heading after:delay-300 after:duration-300 group-hover:w-6 group-hover:before:w-3.5 group-hover:before:-rotate-45 group-hover:after:w-3.5 group-hover:after:rotate-45"
+            ></div>
+            <div
+              class="size-1 rounded-full bg-heading duration-300 group-hover:opacity-0"
+            ></div>
+          </div>
+        </div>
+        <!-- Information -->
+        <div class="flex flex-col justify-center items-center">
+          <h5
+            class="js-name mb-2 text-7 font-bold tracking-tight text-heading leading-8 cursor-none"
+          ></h5>
+          <div class="flex pb-3">
+            <span class="font-semibold text-heading cursor-none"
+              >Category:&nbsp;</span
+            >
+            <p class="text-fg-brand-strong js-category cursor-none"></p>
+          </div>
+          <div class="flex">
+            <p class="text-fg-brand-strong js-year cursor-none"></p>
+            <span class="font-semibold text-heading cursor-none"
+              >&nbsp;-&nbsp;years old</span
+            >
+          </div>
+
+          <div class="flex justify-end pt-12 gap-4 pb-7">
+            <!-- Edit btn -->
+            <button
+              type="button"
+              class="text-fg-brand bg-neutral-primary border border-brand hover:bg-blue-500 hover:text-white focus:ring-4 focus:ring-brand-subtle font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
+            >
+              <div class="flex justify-center items-center gap-1">
+                <span>
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 15 15"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M11.8536 1.14645C11.6583 0.951184 11.3417 0.951184 11.1465 1.14645L3.71455 8.57836C3.62459 8.66832 3.55263 8.77461 3.50251 8.89155L2.04044 12.303C1.9599 12.491 2.00189 12.709 2.14646 12.8536C2.29103 12.9981 2.50905 13.0401 2.69697 12.9596L6.10847 11.4975C6.2254 11.4474 6.3317 11.3754 6.42166 11.2855L13.8536 3.85355C14.0488 3.65829 14.0488 3.34171 13.8536 3.14645L11.8536 1.14645ZM4.42166 9.28547L11.5 2.20711L12.7929 3.5L5.71455 10.5784L4.21924 11.2192L3.78081 10.7808L4.42166 9.28547Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </span>
+                <span class="text-shadow-fg-brand-strong">Edit</span>
+              </div>
+            </button>
+            <!-- Delete button -->
+            <button
+              type="button"
+              class="text-danger bg-neutral-primary border border-danger hover:bg-red-400 hover:text-white focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
+            >
+              <div class="flex justify-center items-center gap-1">
+                <span>
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 15 15"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5.5 1C5.22386 1 5 1.22386 5 1.5C5 1.77614 5.22386 2 5.5 2H9.5C9.77614 2 10 1.77614 10 1.5C10 1.22386 9.77614 1 9.5 1H5.5ZM3 3.5C3 3.22386 3.22386 3 3.5 3H5H10H11.5C11.7761 3 12 3.22386 12 3.5C12 3.77614 11.7761 4 11.5 4H11V12C11 12.5523 10.5523 13 10 13H5C4.44772 13 4 12.5523 4 12V4L3.5 4C3.22386 4 3 3.77614 3 3.5ZM5 4H10V12H5V4Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </span>
+                <span class="text-currentColor">Delete</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <!-- loader -->
+    <template id="templateLoader">
+    <div
+      class="bg-neutral-primary/40 w-70 mx-auto p-6 border border-default rounded-base shadow-xs hover:bg-neutral-secondary-soft group"
+    >
+
+      <div class="flex flex-col justify-center items-center">
+        <div
+          role="status"
+          class="max-w-sm animate-pulse flex flex-col justify-center items-center pt-15 "
+        >
+          <div class="h-5 bg-neutral-quaternary rounded-full w-15 mb-4"></div>
+      <div class="flex flex-col justify-center gap-3 items-center">
+            <div class="h-4 bg-neutral-quaternary rounded-full w-25 mb-2.5"></div>
+          <div class="h-4 bg-neutral-quaternary rounded-full w-20 mb-2.5 "></div>
+      </div>
+        </div>
+
+        <div class="flex justify-end pt-12 gap-4 pb-7">
+          <div
+            role="status"
+            class="max-w-sm animate-pulse justify-center items-center"
+          >
+            <div class="flex justify-center gap-4">
+              <div
+                class="h-10.5 bg-neutral-quaternary rounded-full w-19 mb-2.5"
+              ></div>
+              <div
+                class="h-10.5 bg-neutral-quaternary rounded-full w-23 mb-2.5"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </template>
+
+    <!-- toast -->
+    <!-- <div
+      id="toast-top-left"
+      class="fixed mt-20 flex items-center w-full max-w-xs p-4 text-body bg-neutral-primary-soft rounded-base shadow-xs border border-default top-5 start-5"
+      role="alert"
+    ></div> -->
+    <script src="./js/mode.js"></script>
+    <script src="./node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
