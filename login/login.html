@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" class="bg-linear-to-br from-pink-200 to-blue-400">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LogIn</title>
+    <link rel="stylesheet" href="../src/output.css" />
+  </head>
+  <body>
+    <div class="flex justify-center items-center h-full w-full mt-10 pb-30">
+      <div class="grid gap-8 w-95">
+        <section
+          id="back-div"
+          class="bg-gradient-to-r from-blue-500 to-purple-500 rounded-3xl"
+        >
+          <div
+            class="border-8 border-transparent rounded-xl bg-white dark:bg-gray-900 shadow-xl p-8 m-2"
+          >
+            <h1
+              class="text-5xl font-bold text-center cursor-default dark:text-gray-300 text-gray-900 pb-10"
+            >
+              Log in
+            </h1>
+            <form id="loginForm" class="space-y-6">
+              <div>
+                <label for="email" class="block mb-2 text-lg dark:text-gray-300"
+                  >Usarname</label
+                >
+                <input
+                  id="text"
+                  name="username"
+                  class="border p-3 shadow-md dark:bg-indigo-700 dark:text-gray-300 dark:border-gray-700 border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 transition transform hover:scale-105 duration-300"
+                  type="text"
+                  placeholder="usarname..."
+                  required=""
+                />
+              </div>
+              <div>
+                <label
+                  for="password"
+                  class="block mb-2 text-lg dark:text-gray-300"
+                  >password</label
+                >
+                <input
+                  id="password"
+                  class="border p-3 shadow-md dark:bg-indigo-700 dark:text-gray-300 dark:border-gray-700 border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 transition transform hover:scale-105 duration-300"
+                  type="password"
+                  name="password"
+                  placeholder="Password..."
+                  required=""
+                />
+              </div>
+              <a
+                href="#"
+                class="text-blue-400 text-sm transition hover:underline"
+                >Forget your password?</a
+              >
+              <button
+                class=" js-login-btn w-full p-3 mt-4 text-white bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg hover:scale-105 transition transform duration-300 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                type="submit"
+              >
+                LOG IN
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="./login.js"></script>
+  </body>
+</html>

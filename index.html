@@ -38,7 +38,7 @@
   </head>
   <body class="overflow-x-hidden">
     <nav
-      class="bg-neutral-primary-medium/90 fixed w-full z-20 top-0 start-0 border-b border-default"
+      class="bg-neutral-primary-medium/40 backdrop-blur-sm fixed w-full z-20 top-0 start-0 border-b border-default"
     >
       <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
@@ -57,10 +57,11 @@
           <!-- enter -->
           <div class="flex justify-center items-center gap-4">
             <button
+              id="login"
               type="button"
-              class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none"
+              class="text-white hidden bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none"
             >
-              <span>
+              <span class="flex gap-2 items-center">
                 <svg
                   width="15"
                   height="15"
@@ -75,8 +76,10 @@
                     clip-rule="evenodd"
                   ></path>
                 </svg>
+                logIn
               </span>
             </button>
+            <!-- theme changer -->
             <button
               id="theme-toggle"
               type="button"
@@ -114,7 +117,7 @@
     <!-- search add  -->
     <div class="w-7xl mx-auto flex justify-start">
       <div
-        class="top-23 flex w-100 mx-auto pl-2 fixed justify-center items-center gap-5"
+        class="top-23 z-50 backdrop-blur-sm flex w-100 mx-auto pl-2 fixed justify-center items-center gap-5"
       >
         <!-- search -->
         <div class="">
@@ -127,7 +130,7 @@
               <input
                 type="search"
                 id="search"
-                class="block w-full p-3 ps-9 bg-neutral-secondary-medium/60 border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                class="block w-full p-3 ps-9 bg-neutral-secondary-medium/30 border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                 placeholder="Animal name"
                 required
               />
@@ -142,25 +145,33 @@
         </div>
         <!-- add -->
         <button
-          type="button"
-          class="text-white bg-brand/90 hover:bg-brand-light box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none"
+          id="addBtn"
+          data-modal-target="crud-modal"
+          data-modal-toggle="crud-modal"
+          class="rounded-lg relative w-32 h-10 cursor-pointer flex items-center border border-brand bg-brand group hover:bg-brand active:bg-brand active:bg-brand"
         >
-          <span class="flex justify-center items-center gap-1">
+          <span
+            class="text-gray-200 font-semibold ml-4 transform group-hover:translate-x-20 transition-all duration-300"
+            >Add</span
+          >
+          <span
+            class="absolute right-0 h-full w-10 rounded-lg bg-brand flex items-center justify-center transform group-hover:translate-x-0 group-hover:w-full transition-all duration-300"
+          >
             <svg
-              width="15"
-              height="15"
-              viewBox="0 0 15 15"
+              class="svg w-8 text-white"
               fill="none"
+              height="24"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M8 2.75C8 2.47386 7.77614 2.25 7.5 2.25C7.22386 2.25 7 2.47386 7 2.75V7H2.75C2.47386 7 2.25 7.22386 2.25 7.5C2.25 7.77614 2.47386 8 2.75 8H7V12.25C7 12.5261 7.22386 12.75 7.5 12.75C7.77614 12.75 8 12.5261 8 12.25V8H12.25C12.5261 8 12.75 7.77614 12.75 7.5C12.75 7.22386 12.5261 7 12.25 7H8V2.75Z"
-                fill="currentColor"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-              ></path>
+              <line x1="12" x2="12" y1="5" y2="19"></line>
+              <line x1="5" x2="19" y1="12" y2="12"></line>
             </svg>
-            <span>Add animal</span>
           </span>
         </button>
       </div>
@@ -173,84 +184,63 @@
     <!-- Loader -->
     <div
       id="loader"
-      class="grid grid-cols-1  justify-center mx-auto gap-4 sm:w- sm:grid-cols-2 md:w-xl md:grid-cols-2 lg:grid-cols-3 lg:w-7xl xl:grid-cols-4 xl:w-7xl"
+      class="grid grid-cols-1 justify-center mx-auto gap-4 sm:w- sm:grid-cols-2 md:w-xl md:grid-cols-2 lg:grid-cols-3 lg:w-7xl xl:grid-cols-4 xl:w-7xl"
     ></div>
 
     <!-- Template -->
     <template id="templateCard">
       <div
         id="js-card"
-        class="bg-neutral-primary/40 w-70 mx-auto p-6 border border-default rounded-base shadow-xs hover:bg-neutral-secondary-soft group"
+        class="js-cards bg-neutral-primary/40 w-70 mx-auto p-6 border border-default rounded-base shadow-xs hover:bg-neutral-secondary-soft relative group"
       >
         <!-- hoverbtn -->
-        <div class="flex justify-end">
-          <div
-            id="info"
-            class="group opacity-0 group-hover:opacity-100 flex size-10 items-center justify-center gap-1 rounded-lg border border-headi"
-          >
+        <a class="before:absolute before:inset-0 before:inline-block">
+          <div class="flex justify-end">
             <div
-              class="size-1 rounded-full bg-heading duration-300 group-hover:opacity-0"
-            ></div>
-            <div
-              class="relative size-1 origin-center rounded-full bg-heading duration-300 before:absolute before:right-[2px] before:h-1 before:origin-right before:rounded-full before:bg-heading before:delay-300 before:duration-300 after:absolute after:right-[2px] after:h-1 after:origin-right after:rounded-full after:bg-heading after:delay-300 after:duration-300 group-hover:w-6 group-hover:before:w-3.5 group-hover:before:-rotate-45 group-hover:after:w-3.5 group-hover:after:rotate-45"
-            ></div>
-            <div
-              class="size-1 rounded-full bg-heading duration-300 group-hover:opacity-0"
-            ></div>
+              id="info"
+              class="group opacity-0 group-hover:opacity-100 flex size-10 items-center justify-center gap-1 rounded-lg border border-headi"
+            >
+              <div
+                class="size-1 rounded-full bg-heading duration-300 group-hover:opacity-0"
+              ></div>
+              <div
+                class="relative size-1 origin-center rounded-full bg-heading duration-300 before:absolute before:right-[2px] before:h-1 before:origin-right before:rounded-full before:bg-heading before:delay-300 before:duration-300 after:absolute after:right-[2px] after:h-1 after:origin-right after:rounded-full after:bg-heading after:delay-300 after:duration-300 group-hover:w-6 group-hover:before:w-3.5 group-hover:before:-rotate-45 group-hover:after:w-3.5 group-hover:after:rotate-45"
+              ></div>
+              <div
+                class="size-1 rounded-full bg-heading duration-300 group-hover:opacity-0"
+              ></div>
+            </div>
           </div>
-        </div>
+        </a>
         <!-- Information -->
         <div class="flex flex-col justify-center items-center">
           <h5
-            class="js-name mb-2 text-7 font-bold tracking-tight text-heading leading-8 cursor-none"
+            class="js-name mb-2 text-7 font-bold tracking-tight text-heading leading-8"
           ></h5>
           <div class="flex pb-3">
-            <span class="font-semibold text-heading cursor-none"
-              >Category:&nbsp;</span
-            >
-            <p class="text-fg-brand-strong js-category cursor-none"></p>
+            <span class="font-semibold text-heading">Category:&nbsp;</span>
+            <p class="text-fg-brand-strong js-category"></p>
           </div>
           <div class="flex">
-            <p class="text-fg-brand-strong js-year cursor-none"></p>
-            <span class="font-semibold text-heading cursor-none"
-              >&nbsp;-&nbsp;years old</span
+            <span class="font-semibold text-heading">
+              Avarage years&nbsp;-&nbsp;</span
             >
+
+            <p class="text-fg-brand-strong js-year"></p>
           </div>
 
           <div class="flex justify-end pt-12 gap-4 pb-7">
-            <!-- Edit btn -->
-            <button
-              type="button"
-              class="text-fg-brand bg-neutral-primary border border-brand hover:bg-blue-500 hover:text-white focus:ring-4 focus:ring-brand-subtle font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
-            >
-              <div class="flex justify-center items-center gap-1">
-                <span>
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 15 15"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11.8536 1.14645C11.6583 0.951184 11.3417 0.951184 11.1465 1.14645L3.71455 8.57836C3.62459 8.66832 3.55263 8.77461 3.50251 8.89155L2.04044 12.303C1.9599 12.491 2.00189 12.709 2.14646 12.8536C2.29103 12.9981 2.50905 13.0401 2.69697 12.9596L6.10847 11.4975C6.2254 11.4474 6.3317 11.3754 6.42166 11.2855L13.8536 3.85355C14.0488 3.65829 14.0488 3.34171 13.8536 3.14645L11.8536 1.14645ZM4.42166 9.28547L11.5 2.20711L12.7929 3.5L5.71455 10.5784L4.21924 11.2192L3.78081 10.7808L4.42166 9.28547Z"
-                      fill="currentColor"
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </span>
-                <span class="text-shadow-fg-brand-strong">Edit</span>
-              </div>
-            </button>
             <!-- Delete button -->
             <button
               type="button"
-              class="text-danger bg-neutral-primary border border-danger hover:bg-red-400 hover:text-white focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
+              class="js-delete-btn z-10 text-danger bg-neutral-primary border border-danger hover:bg-red-400 hover:text-white focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
             >
-              <div class="flex justify-center items-center gap-1">
-                <span>
+              <div
+                class="pointer-events-none flex justify-center items-center gap-1"
+              >
+                <span class="pointer-events-none">
                   <svg
+                    class="pointer-events-none"
                     width="15"
                     height="15"
                     viewBox="0 0 15 15"
@@ -275,48 +265,299 @@
 
     <!-- loader -->
     <template id="templateLoader">
-    <div
-      class="bg-neutral-primary/40 w-70 mx-auto p-6 border border-default rounded-base shadow-xs hover:bg-neutral-secondary-soft group"
-    >
-
-      <div class="flex flex-col justify-center items-center">
-        <div
-          role="status"
-          class="max-w-sm animate-pulse flex flex-col justify-center items-center pt-15 "
-        >
-          <div class="h-5 bg-neutral-quaternary rounded-full w-15 mb-4"></div>
-      <div class="flex flex-col justify-center gap-3 items-center">
-            <div class="h-4 bg-neutral-quaternary rounded-full w-25 mb-2.5"></div>
-          <div class="h-4 bg-neutral-quaternary rounded-full w-20 mb-2.5 "></div>
-      </div>
-        </div>
-
-        <div class="flex justify-end pt-12 gap-4 pb-7">
+      <div
+        class="bg-neutral-primary/40 w-70 mx-auto p-6 border border-default rounded-base shadow-xs hover:bg-neutral-secondary-soft group"
+      >
+        <div class="flex flex-col justify-center items-center">
           <div
             role="status"
-            class="max-w-sm animate-pulse justify-center items-center"
+            class="max-w-sm animate-pulse flex flex-col justify-center items-center pt-15"
           >
-            <div class="flex justify-center gap-4">
+            <div class="h-5 bg-neutral-quaternary rounded-full w-15 mb-4"></div>
+            <div class="flex flex-col justify-center gap-3 items-center">
               <div
-                class="h-10.5 bg-neutral-quaternary rounded-full w-19 mb-2.5"
+                class="h-4 bg-neutral-quaternary rounded-full w-25 mb-2.5"
               ></div>
               <div
-                class="h-10.5 bg-neutral-quaternary rounded-full w-23 mb-2.5"
+                class="h-4 bg-neutral-quaternary rounded-full w-20 mb-2.5"
               ></div>
+            </div>
+          </div>
+
+          <div class="flex justify-end pt-12 gap-4 pb-7">
+            <div
+              role="status"
+              class="max-w-sm animate-pulse justify-center items-center"
+            >
+              <div class="flex justify-center">
+                <div
+                  class="h-10.5 bg-neutral-quaternary rounded-full w-23 mb-2.5"
+                ></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </template>
+    <!-- Modal main div-->
+    <div
+      id="crud-modal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+    >
+      <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div
+          class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6"
+        >
+          <!-- Modal header -->
+          <div
+            class="flex items-center justify-between border-b border-default pb-4 md:pb-5"
+          >
+            <h3 class="text-lg font-medium text-heading">Add new animal</h3>
+            <button
+              data-modal-target="crud-modal"
+              data-modal-toggle="crud-modal"
+              type="button"
+              class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center"
+              data-modal-hide="crud-modal"
+            >
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18 17.94 6M18 18 6.06 6"
+                />
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <!-- Modal body -->
+          <form id="addFrom">
+            <div class="grid gap-4 grid-cols-2 py-4 md:py-6">
+              <div class="col-span-2">
+                <label
+                  for="name"
+                  class="block mb-2.5 text-sm font-medium text-heading"
+                  >Name</label
+                >
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                  placeholder="Enter animal name..."
+                  required=""
+                />
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label
+                  for="price"
+                  class="block mb-2.5 text-sm font-medium text-heading"
+                  >Year</label
+                >
+                <input
+                  type="number"
+                  min="0"
+                  name="year"
+                  id="year"
+                  class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                  placeholder="enter avarage year... "
+                  required=""
+                />
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label
+                  for="category"
+                  class="block mb-2.5 text-sm font-medium text-heading"
+                  >Category</label
+                >
+                <select
+                  name="category"
+                  id="category"
+                  class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 py-2.5 shadow-xs placeholder:text-body"
+                >
+                  <option>Select category</option>
+                  <option>Reptile</option>
+                  <option>Bird</option>
+                  <option>Mammal</option>
+                  <option>Fish</option>
+                </select>
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label
+                  for="price"
+                  class="block mb-2.5 text-sm font-medium text-heading"
+                  >Speed</label
+                >
+                <input
+                  type="number"
+                  min="0"
+                  name="speed"
+                  id="speed"
+                  class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                  placeholder="enter animal speed... "
+                  required=""
+                />
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label
+                  for="price"
+                  class="block mb-2.5 text-sm font-medium text-heading"
+                  >Weight</label
+                >
+                <input
+                  type="number"
+                  min="0"
+                  name="weight"
+                  id="weight"
+                  class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                  placeholder="enter animal weight... "
+                  required=""
+                />
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label
+                  for="price"
+                  class="block mb-2.5 text-sm font-medium text-heading"
+                  >Color</label
+                >
+                <input
+                  type="text"
+                  minlength="0"
+                  maxlength="15"
+                  name="color"
+                  id="color"
+                  class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                  placeholder="enter animal color... "
+                  required=""
+                />
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label
+                  for="category"
+                  class="block mb-2.5 text-sm font-medium text-heading"
+                  >Is this Wild?</label
+                >
+                <select
+                  name="isWild"
+                  id="isWild"
+                  class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 py-2.5 shadow-xs placeholder:text-body"
+                >
+                  <option>false</option>
+                  <option>true</option>
+                </select>
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label
+                  for="price"
+                  class="block mb-2.5 text-sm font-medium text-heading"
+                  >Sound text</label
+                >
+                <input
+                  type="text"
+                  minlength="0"
+                  maxlength="15"
+                  name="soundText"
+                  id="soundText"
+                  class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                  placeholder="enter animal soundtext... "
+                  required=""
+                />
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label
+                  for="category"
+                  class="block mb-2.5 text-sm font-medium text-heading"
+                  >Habitat</label
+                >
+                <select
+                  name="habitat"
+                  id="habitat"
+                  class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 py-2.5 shadow-xs placeholder:text-body"
+                >
+                  <option>Select Place</option>
+                  <option>Mountain</option>
+                  <option>Field</option>
+                  <option>Forest</option>
+                  <option>Home</option>
+                  <option>Ocean</option>
+                  <option>Cliff</option>
+                  <option>Desert</option>
+                  <option>Savanna</option>
+                  <option>Forest</option>
+                </select>
+              </div>
+            </div>
+            <div
+              class="flex items-center space-x-4 border-t border-default pt-4 md:pt-6"
+            ></div>
+          </form>
+          <div class="flex items-center justify-start gap-4">
+            <button
+              id="addModalBtn"
+              type="submit"
+              class="inline-flex items-center text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
+            >
+              <svg
+                class="w-4 h-4 me-1.5 -ms-0.5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 12h14m-7 7V5"
+                />
+              </svg>
+              Add new product
+            </button>
+            <button
+              data-modal-hide="crud-modal"
+              type="button"
+              class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- toast -->
-    <!-- <div
-      id="toast-top-left"
-      class="fixed mt-20 flex items-center w-full max-w-xs p-4 text-body bg-neutral-primary-soft rounded-base shadow-xs border border-default top-5 start-5"
-      role="alert"
-    ></div> -->
+    <template id="toastTemp">
+      <div
+        id="toast-top-right"
+        class="fixed flex items-center w-full max-w-xs p-4 text-neutral-primary-soft bg-brand-light rounded-base shadow-xs border top-5 end-5"
+        role="alert"
+      >
+        <span id="textAlert" class="text-sm font-normal"></span>
+        <span id="loginAler" class="text-sm font-normal"></span>
+      </div>
+    </template>
+
+    <!-- tost container -->
+    <div id="toastCont" class="fixed top-20 right-10 z-999"></div>
+
     <script src="./js/mode.js"></script>
+    <script type="module" src="./js/modal.js"></script>
     <script src="./node_modules/flowbite/dist/flowbite.min.js"></script>
     <script type="module" src="./js/app.js"></script>
   </body>

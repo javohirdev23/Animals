@@ -1,13 +1,169 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark bg-neutral-primary-medium">
   <head>
+    <!-- mode switcher -->
+    <script>
+      if (
+        localStorage.getItem("color-theme") === "dark" ||
+        (!("color-theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Informations</title>
     <link rel="stylesheet" href="../src/output.css" />
   </head>
   <body>
-    <h1>salom</h1>
-    <script src="./data.js"></script>
+    <!-- Back button -->
+    <div
+      class="w-90 flex justify-between mt-10 ml-5 sm:w-150 md:w-187 lg:w-275"
+    >
+      <a href="../index.html">
+        <button
+          class="bg-white text-center w-48 rounded-2xl h-14 relative text-black text-xl font-semibold group"
+          type="button"
+        >
+          <div
+            class="bg-green-400 rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[184px] z-10 duration-500"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1024 1024"
+              height="25px"
+              width="25px"
+            >
+              <path
+                d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"
+                fill="#000000"
+              ></path>
+              <path
+                d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
+                fill="#000000"
+              ></path>
+            </svg>
+          </div>
+          <p class="translate-x-2">Go Back</p>
+        </button>
+      </a>
+      <!-- theme changer -->
+      <button
+        id="theme-toggle"
+        type="button"
+        class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-3"
+      >
+        <svg
+          id="theme-toggle-dark-icon"
+          class="hidden w-6 h-6"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+          ></path>
+        </svg>
+        <svg
+          id="theme-toggle-light-icon"
+          class="hidden w-6 h-6"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <!-- Container -->
+    <div class="containerInfo w-100 mx-auto justify-center mt-15"></div>
+    <!-- Template -->
+    <template class="templateInfo">
+      <div
+        class="flex flex-col gap-4 border border-gray-500 rounded-md justify-center p-6 bg-neutral-primary-medium/40 backdrop-blur-sm"
+      >
+        <h2 class="js-name font-bold text-3xl text-heading"></h2>
+        <div class="flex">
+          <span class="font-semibold text-heading"
+            >This animal enter&nbsp;</span
+          >
+          <p class="js-category text-fg-brand-strong font-bold"></p>
+          <span class="font-semibold text-heading">'s category</span>
+        </div>
+        <div class="flex">
+          <span class="font-semibold text-heading"
+            >This animal can run&nbsp;</span
+          >
+          <p class="js-speed text-fg-brand-strong font-bold"></p>
+          <span class="font-semibold text-heading">&nbsp;km/s max</span>
+        </div>
+        <div class="flex">
+          <span class="font-semibold text-heading"
+            >This animal sountex is&nbsp;</span
+          >
+          <p class="js-soundText text-fg-brand-strong font-bold"></p>
+        </div>
+        <div class="flex">
+          <span class="font-semibold text-heading"
+            >This animal avarage live &nbsp;</span
+          >
+          <p class="js-years text-fg-brand-strong font-bold"></p>
+          <span class="font-semibold text-heading">&nbsp;years</span>
+        </div>
+        <div class="flex">
+          <span class="font-semibold text-heading"
+            >This animal avarage weight is &nbsp;</span
+          >
+          <p class="js-weight text-fg-brand-strong font-bold"></p>
+          <span class="font-semibold text-heading">&nbsp;kg</span>
+        </div>
+        <div class="flex">
+          <span class="font-semibold text-heading"
+            >This animal color is &nbsp;</span
+          >
+          <p class="js-color text-fg-brand-strong font-bold"></p>
+        </div>
+        <div class="flex">
+          <span class="font-semibold text-heading"
+            >This animal usually live in &nbsp;</span
+          >
+          <p class="js-habitat text-fg-brand-strong font-bold"></p>
+        </div>
+        <div class="flex">
+          <span class="font-semibold text-heading">Is Wild? &nbsp;</span>
+          <span class="text-heading">(</span>
+          <p class="js-isWild text-fg-brand-strong font-bold"></p>
+          <span class="text-heading">)</span>
+        </div>
+      </div>
+    </template>
+    <!-- loader Container -->
+    <div class="skeletonContainer w-100 mx-auto justify-center mt-15"></div>
+    <!-- skeleton -->
+    <template class="templateSkeleton">
+      <div class="flex flex-col gap-4 justify-center">
+        <div role="status" class="grid gap-6 mt-4 animate-pulse p-6">
+          <div class="h-6 bg-neutral-quaternary rounded-full w-35"></div>
+          <div class="h-4 bg-neutral-quaternary rounded-full max-w-70"></div>
+          <div class="h-4 bg-neutral-quaternary rounded-full w-70"></div>
+          <div class="h-4 bg-neutral-quaternary rounded-full max-w-65"></div>
+          <div class="h-4 bg-neutral-quaternary rounded-full max-w-67"></div>
+          <div class="h-4 bg-neutral-quaternary rounded-full max-w-68"></div>
+          <div class="h-4 bg-neutral-quaternary rounded-full max-w-60"></div>
+          <div class="h-4 bg-neutral-quaternary rounded-full max-w-64"></div>
+          <div class="h-4 bg-neutral-quaternary rounded-full max-w-30"></div>
+        </div>
+      </div>
+    </template>
+    <script src="../js/mode.js" type="module"></script>
+    <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src="./data.js" type="module"></script>
   </body>
 </html>
