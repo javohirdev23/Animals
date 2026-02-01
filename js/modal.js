@@ -12,10 +12,11 @@ import {
   elFormSpeed,
   elFormYear,
   elFormCategory,
+  
 } from "./elements.js";
 
 elAddModalBtn.addEventListener("click", (evt) => {
-  // evt.preventDefault();
+  evt.preventDefault();
   const obj = {
     name: elFormName.value,
     year: elFormYear.value,
